@@ -45,6 +45,11 @@
 
       geoip2 /etc/geolite/GeoLite2-City.mmdb {
       $geoip2_data_city_name city names en;
+      $geoip2_data_state_code subdivisions 0 iso_code;
+      $geoip2_data_state_name subdivisions 0  names en;
+      $geoip2_data_latitude location latitude;
+      $geoip2_data_longitude location longitude;
+      $geoip2_data_accuracy location accuracy_radius;
       }
 
 - name: update nginx.conf file to format log for loki dashboard
@@ -93,7 +98,12 @@
                 '"http_cf_ray": "$http_cf_ray",'
                 '"geoip_country_code": "$geoip2_data_country_code",'
                 '"geoip_country_name": "$geoip2_data_country_name",'
-                '"geoip_city_name": "$geoip2_data_city_name"'
+                '"geoip_city_name": "$geoip2_data_city_name",'
+                '"geoip_state_code": "$geoip2_data_state_code",'
+                '"geoip_state_name": "$geoip2_data_state_name",'
+                '"geoip_latitude": "$geoip2_data_latitude",'
+                '"geoip_longitude": "$geoip2_data_longitude",'
+                '"geoip_accuracy": "$geoip2_data_accuracy"'
                 '}';
 
        access_log /var/log/nginx/json_access.log json_analytics;
